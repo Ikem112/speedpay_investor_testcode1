@@ -10,6 +10,7 @@ requests = "*"
 psycopg2 = "*"
 flask-marshmallow = "*"
 flask-cors = "*"
+gunicorn = "*"
 
 [dev-packages]
 
