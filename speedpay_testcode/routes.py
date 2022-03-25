@@ -1,16 +1,17 @@
 from flask import jsonify, request
 
-from speedpay_testcode import app
+
 from .models import Users, total_bill_transactions, total_loan_transactions, Bill_payments
 # from .models_schema import User_Schema
 
+from speedpay_testcode.blueprints import testcode
 
-@app.route("/")
+@testcode.route("/")
 def index():
     print("i came here")
     return  'Hello world'
 
-@app.route("/login_investor", methods=['POST'])
+@testcode.route("/login_investor", methods=['POST'])
 def login():
     try :
         email = request.json['email']
@@ -28,7 +29,7 @@ def login():
         print(e)
         return jsonify({'status': 'failed', 'msg': "couldn't connect to database" }), 422
 
-@app.route('/statistics', methods=['GET'])
+@testcode.route('/statistics', methods=['GET'])
 def statistics():
     try:
         total_users = Users.query.count()
