@@ -9,7 +9,7 @@ from speedpay_testcode.blueprints import testcode
 @testcode.route("/")
 def index():
     print("i came here")
-    return  'Hello world'
+    return  index
 
 @testcode.route("/login_investor", methods=['POST'])
 def login():

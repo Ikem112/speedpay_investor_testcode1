@@ -1,4 +1,4 @@
-from speedpay_testcode import create_app, db
+from speedpay_testcode import create_app
 
 app = create_app()
 
