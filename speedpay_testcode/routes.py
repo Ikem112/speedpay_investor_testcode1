@@ -23,7 +23,7 @@ def login():
             }),
         else:
             return jsonify({
-                'staus' : 'success'
+                'status' : 'success'
             })
     except Exception as e:
         print(e)
@@ -46,7 +46,7 @@ def statistics():
                 'avg_daily_reg' : 4,
                 'total_daily_reg' : 6,
                 'avg_weekly_reg' : 19,
-                'total_weekly_reg' : 30,
+                'total_weekly_reg' : 30,    
                 'avg_monthly_reg' : 70, 
                 'total_monthly_reg' : 120
             },
