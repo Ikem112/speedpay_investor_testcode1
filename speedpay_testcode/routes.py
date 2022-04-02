@@ -17,13 +17,13 @@ def login():
         email = request.json['email']
         password = request.json['password']
 
-        if not email != 'investor@mail.com' and password != 'invest123':
-            return jsonify({
-                'status': 'login failed'
-            }),
-        else:
+        if email == 'investor@mail.com' and password == 'invest123':
             return jsonify({
                 'status' : 'success'
+            })
+        else:
+            return jsonify({
+                'status' : 'login failed'
             })
     except Exception as e:
         print(e)

@@ -8,15 +8,15 @@ import psycopg2
 
 db = SQLAlchemy()
 # ma = Marshmallow()
-cs = CORS()
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    CORS(app)
     db.init_app(app)
-    cs.init_app(app)
-    app.app_context().push()
+    # app.app_context().push()
     #ma.init_app(app)
 
     from .blueprints import testcode as testcode_blueprint

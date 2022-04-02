@@ -86,7 +86,7 @@ def total_bill_transactions():
     
     return total_bills
 
-total_bill_transactions()
+# total_bill_transactions()
 
 def total_loan_transactions():
     loans = Loan_payments.query.all()
