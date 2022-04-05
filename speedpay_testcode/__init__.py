@@ -1,12 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from config import Config
+# from flask_jwt_extended import JWTManager
 # from flask_marshmallow import Marshmallow
+
+from config import Config
+
 
 import psycopg2
 
 db = SQLAlchemy()
+# jwt = JWTManager()
 # ma = Marshmallow()
 
 
@@ -16,6 +20,7 @@ def create_app(config_class=Config):
 
     CORS(app)
     db.init_app(app)
+    # jwt.init_app(app)
     # app.app_context().push()
     #ma.init_app(app)
 

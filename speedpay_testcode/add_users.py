@@ -3,7 +3,7 @@
 # # try:
 # #     bob = Users(first_name='bob', last_name='stew', email='bob@mail.com', phone_no='08097565785', address='lekki')
 # #     ben = Users(first_name='ben', last_name='burna', email='ben@mail.com', phone_no='08078986457', address='lekki, lagos')
-# #     ikem = Users(first_name='ikem', last_name='stew', email='bob@mail.com', phone_no='08097565785', address='lekki')
+# #     ikem = Users(first_name='ikem', last_name='stew', email='ikem@mail.com', phone_no='08097565785', address='lekki')
 # #     john = Users(first_name='john', last_name='chisco', email='john@mail.com', phone_no='08086509345', address='ajah')
 # #     fred = Users(first_name='fred', last_name='pastor', email='fred@mail.com', phone_no='08078567490', address='ikorodu')
 # #     tolu = Users(first_name='tolu', last_name='tolu', email='tolu@mail.com', phone_no='08098089646', address='kano')

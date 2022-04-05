@@ -1,5 +1,5 @@
 from flask import jsonify, request
-
+# from models import Users
 
 from .models import Users, total_bill_transactions, total_loan_transactions, Bill_payments
 # from .models_schema import User_Schema
@@ -17,15 +17,29 @@ def login():
         email = request.json['email']
         password = request.json['password']
 
-        if email == 'investor@mail.com' and password == 'invest123':
+        if not email:
+            return jsonify({ 'status' : 'email missing'}), 400
+        if not password:
+            return jsonify({ 'status' : 'password missing'}), 400
+        if not email and password:
+            return jsonify({ 'status' : 'email and password are missing'}), 400
+
+        user_email = Users.query.filter_by(email=email).first()
+         
+
+        if not user_email:
+            return jsonify({ 'status' : 'user not found'}), 400
+
+        if user_email and password == user_email.phone_no:
             return jsonify({
-                'status' : 'success'
+                'status' : 'login success'
                 
-            })
+            }), 200
         else:
+            print (f'failed login from {email}')
             return jsonify({
-                'status' : 'login failed'
-            })
+                'status' : 'login failed, please check details'
+            }), 422
     except Exception as e:
         print(e)
         return jsonify({'status': 'failed', 'msg': "couldn't connect to database" }), 422
