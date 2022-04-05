@@ -1,7 +1,8 @@
 from flask import jsonify, request
-# from models import Users
+
 
 from .models import Users, total_bill_transactions, total_loan_transactions, Bill_payments
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 # from .models_schema import User_Schema
 
 from speedpay_testcode.blueprints import testcode
@@ -25,14 +26,18 @@ def login():
             return jsonify({ 'status' : 'email and password are missing'}), 400
 
         user_email = Users.query.filter_by(email=email).first()
+        username = user_email.first_name
          
 
         if not user_email:
             return jsonify({ 'status' : 'user not found'}), 400
 
         if user_email and password == user_email.phone_no:
+            access_token = create_access_token(identity={"email":email, "username":username.title()})
+
             return jsonify({
-                'status' : 'login success'
+                'status' : 'login success',
+                'access_token' : access_token
                 
             }), 200
         else:
@@ -42,10 +47,14 @@ def login():
             }), 422
     except Exception as e:
         print(e)
-        return jsonify({'status': 'failed', 'msg': "couldn't connect to database" }), 422
+        return jsonify({'status': 'failed', 'msg': "couldn't connect to server" }), 422
 
 @testcode.route('/statistics', methods=['GET'])
+@jwt_required()
 def statistics():
+
+    current_user = get_jwt_identity()
+
     try:
         total_users = Users.query.count()
         amount_total_bill_trans = total_bill_transactions()
@@ -56,7 +65,7 @@ def statistics():
 
         
         return jsonify({
-            'Current_user' : 'investor',
+            'Current_user' : current_user,
             'Users': {
                 'total_users' : total_users,
                 'avg_daily_reg' : 4,
