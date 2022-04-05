@@ -19,8 +19,8 @@ def login():
 
         if email == 'investor@mail.com' and password == 'invest123':
             return jsonify({
-                'status' : 'success',
-                'username' : 'investor'
+                'status' : 'success'
+                
             })
         else:
             return jsonify({
@@ -42,6 +42,7 @@ def statistics():
 
         
         return jsonify({
+            'Current_user' : 'investor',
             'Users': {
                 'total_users' : total_users,
                 'avg_daily_reg' : 4,
