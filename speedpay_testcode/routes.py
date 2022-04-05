@@ -19,7 +19,8 @@ def login():
 
         if email == 'investor@mail.com' and password == 'invest123':
             return jsonify({
-                'status' : 'success'
+                'status' : 'success',
+                'username' : 'investor'
             })
         else:
             return jsonify({
@@ -73,7 +74,8 @@ def statistics():
                 'most_used_bills' : ['Dstv', 'Airtel Data', 'Bet King', 'MTN Data', 'MTN Credit', 'GOtv', 'Startimes', 'IPnx Internet', 'Sporty Bet', 'PHCN'],
                 'most_used_bill_type' : 'cable'
             }
-        })
+        }), 200
+        
     except Exception as e:
         print(e)
         return jsonify({
