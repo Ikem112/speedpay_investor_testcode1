@@ -64,7 +64,8 @@ class Bill_payments(db.Model):
     bill_payment_amount = db.Column(db.Float, nullable=False)
     transaction_id = db.Column(db.Integer, db.ForeignKey('Transactions.id'), nullable=False)
 
-
+    def __repr__(self):
+        return f'Bill payment for trans id {self.transaction_id} is {self.bill_payment_amount} under type {self.bill_payment_type}'
 
 class Loan_payments(db.Model):
     __tablename__ = 'Loan Payments'
@@ -76,26 +77,6 @@ class Loan_payments(db.Model):
     transaction_id = db.Column(db.Integer, db.ForeignKey('Transactions.id'), nullable=False)
 
 
-def total_bill_transactions():
-    bills = Bill_payments.query.all()
-    bill_amount = []
-    for bill in bills:
-        bill_amount.append(bill.bill_payment_amount)
 
-    total_bills = sum(bill_amount)
-    
-    return total_bills
-
-# total_bill_transactions()
-
-def total_loan_transactions():
-    loans = Loan_payments.query.all()
-    loan_amount = []
-    for loan in loans:
-        loan_amount.append(loan.loan_collected)
-
-    total_loans = sum(loan_amount)
-
-    return total_loans
     
 

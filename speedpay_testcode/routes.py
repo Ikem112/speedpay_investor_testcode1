@@ -1,7 +1,8 @@
 from flask import jsonify, request
 
 
-from .models import Users, total_bill_transactions, total_loan_transactions, Bill_payments
+from .models import Users, Bill_payments
+from .query import total_bill_transactions, total_loan_transactions, total_monthly_reg, total_daily_reg, total_weekly_reg, avg_reg_user, avg_trans, total_trans_daily, total_trans_weekly, total_trans_monthly
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 # from .models_schema import User_Schema
 
@@ -61,30 +62,30 @@ def statistics():
         total_loans_dispursed = total_loan_transactions()
         no_of_bill_trans = Bill_payments.query.count()
         total_transactions = amount_total_bill_trans + total_loans_dispursed
-        avg_trans_per_user = total_transactions/total_users
+        avg_trans_per_user = total_transactions//total_users
 
         
         return jsonify({
             'Current_user' : current_user,
             'Users': {
                 'total_users' : total_users,
-                'avg_daily_reg' : 4,
-                'total_daily_reg' : 6,
-                'avg_weekly_reg' : 19,
-                'total_weekly_reg' : 30,    
-                'avg_monthly_reg' : 70, 
-                'total_monthly_reg' : 120
+                'avg_daily_reg' : avg_reg_user('day'),
+                'total_daily_reg' : total_daily_reg(),
+                'avg_weekly_reg' : avg_reg_user('week'),
+                'total_weekly_reg' : total_weekly_reg(),    
+                'avg_monthly_reg' : avg_reg_user('month'), 
+                'total_monthly_reg' : total_monthly_reg()
             },
             'Transactions' : {
                 'total_transactions' : total_transactions,
                 'avg_trans_per_user' : avg_trans_per_user,
                 'total_revenue': total_transactions,
-                'avg_trans_daily' : 3_000_000,
-                'avg_trans_weekly' : 17_960_000,
-                'avg_trans_monthly' : 80_790_000,
-                'total_trans_daily' : 4_000_000,
-                'total_trans_weekly' : 12_000_000,
-                'total_trans_monthly' : 20_970_700
+                'avg_trans_daily' : avg_trans('day'),
+                'avg_trans_weekly' : avg_trans('week'),
+                'avg_trans_monthly' : avg_trans('month'),
+                'total_trans_daily' : total_trans_daily(),
+                'total_trans_weekly' : total_trans_weekly(),
+                'total_trans_monthly' : total_trans_monthly()
             },
             'Loans' : {
                 'total_loan_dispursed' : total_loans_dispursed,
